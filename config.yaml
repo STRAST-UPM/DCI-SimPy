@@ -1,0 +1,9 @@
+processing_unit:
+  window_duration: 30    # Duración de la ventana en segundos
+
+event_generator:
+  lambda: 0.3     # Tasa de llegada (valor de lambda),(por ejemplo, 0.3 para alta carga; prueba 0.05 para baja, 0.1 para media)
+  generators_per_unit: 100  # Número de generadores por unidad
+
+simmulation:
+  duration: 100         # Duración total de la simulación en segundos
