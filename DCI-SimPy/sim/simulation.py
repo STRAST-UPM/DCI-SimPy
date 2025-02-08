@@ -54,10 +54,18 @@ class Processor:
             if self.parent_regular_store is not None:
                 self.parent_regular_store.put(Event(ev.name, ev.time))
             current = self.regular_window_time[ev.time] + self.offloading_window_time[ev.time]
+            // cambiar comprobaciones de número de ventanas por comprobaciones de tiempo:
+            // - de comienzo después de las que ya están planificadas en ese tiempo
+            // - de final antes de MIT
+            // - de final antes del siguiente tiempo previsto de inferencia
+            // cambiar número de ventanas por duración acumulada en cada valor de tiempo
+            // respetando MIT y cuidando de que no solape con la siguiente planificación si existe
             if current < self.max_windows:
                 self.regular_window_time[ev.time] += 1
                 self.regular_monitor.append((self.env.now, self.regular_window_time[ev.time]))
                 # Simula el procesamiento esperando window_duration (la ventana permanece ocupada)
+                // este proceso no debe bloquearse
+                // debe dar control para que un proceso bloqueante tome el procesador cuando llegue su tiempo
                 self.env.process(self.window_process(ev, "regular"))
             else:
                 # Si no hay capacidad, se envía al canal offloading del nodo padre, si existe
