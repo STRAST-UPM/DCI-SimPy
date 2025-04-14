@@ -1,0 +1,11 @@
+# config.yaml (Actualizado y comentado en español)
+simulation:
+  OW: 120          # Ventana de observación en segundos
+  IT: 0.1            # Tiempo de inferencia por evento (en segundos)
+  MIT: 1         # Máximo Tiempo de Inferencia permitido por slot (en segundos) <-- ACTUALIZADO A 5
+  Tunit: 1        # Unidad de tiempo básica para generación de eventos (segundos)
+  duration: 1000   # Duración de la simulación en segundos
+
+event_generator:
+  generators_per_unit: 10  # Número de sensores por procesador/planificador
+  lambda: 0.5       # Parámetro lambda para la distribución exponencial
