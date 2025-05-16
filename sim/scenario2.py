@@ -132,7 +132,7 @@ class Planificador:
                 self.tabla_eventos[tiempo_inicial_oficial] = {
                     'tiempo_inicial_real': tiempo_inicial_real,
                     'tiempo_final_oficial': tiempo_inicial_oficial + MIT,
-                    'tiempo_final_real': tiempo_inicial_real + MIT,
+                    'tiempo_final_real': tiempo_inicial_real + MIT, # ERROR: tiempo_inicial_oficial + MIT
                     'n_inferencias': 0,
                     'sumatorio_it': 0
                 }
@@ -142,6 +142,7 @@ class Planificador:
            
             # Verificar condición de aceptación:
             # tiempo_inicial_real + sumatorio_IT + nuevo_IT < tiempo_inicial_oficial + MIT
+            # ERROR: debe ser <= tiempo_final_real
             if entrada['tiempo_inicial_real'] + entrada['sumatorio_it'] + IT <= tiempo_inicial_oficial + MIT:
                 # Aceptar evento
                 entrada['n_inferencias'] += 1
