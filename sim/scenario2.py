@@ -119,7 +119,8 @@ class Planificador:
             for t_prev, datos in sorted(self.tabla_eventos.items()):
                 if t_prev < tiempo_inicial_oficial:  # Solo eventos anteriores
                     # Verificar condición de bloqueo:
-                    # t0_anterior + W + sumatorio_IT_anterior > t0_actual + W
+                    # t0_anterior (REAL) + OW + sumatorio_IT_anterior > t0_actual + OW
+                    # comprobar la siguiente linea, cuidado porque del anterior tiene que ser t0_real + sumatorio
                     tiempo_final_anterior = t_prev + datos['sumatorio_it']
                     if tiempo_final_anterior > tiempo_inicial_oficial:
                         # Hay bloqueo, ajustar tiempo inicial real
@@ -142,7 +143,7 @@ class Planificador:
            
             # Verificar condición de aceptación:
             # tiempo_inicial_real + sumatorio_IT + nuevo_IT < tiempo_inicial_oficial + MIT
-            # ERROR: debe ser <= tiempo_final_real
+            # es lo mismo que <= tiempo_final_real
             if entrada['tiempo_inicial_real'] + entrada['sumatorio_it'] + IT <= tiempo_inicial_oficial + MIT:
                 # Aceptar evento
                 entrada['n_inferencias'] += 1
