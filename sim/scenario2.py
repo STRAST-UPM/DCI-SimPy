@@ -51,6 +51,7 @@ class Sensor:
             # Lógica de Tiempo de Espera
             tiempo_base = random.expovariate(self.lambda_param)
             tiempo_espera_discreto = self.tunit * int(tiempo_base)
+            # POR QUE ?
             tiempo_espera = max(self.tunit, tiempo_espera_discreto)
            
             # Pausa hasta el próximo evento
